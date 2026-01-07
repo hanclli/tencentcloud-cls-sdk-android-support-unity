@@ -1,7 +1,6 @@
 package com.tencentcloudapi.cls.android.producer.http.comm;
 
 import com.tencentcloudapi.cls.android.producer.http.utils.CaseInsensitiveMap;
-
 import java.util.Map;
 
 /**

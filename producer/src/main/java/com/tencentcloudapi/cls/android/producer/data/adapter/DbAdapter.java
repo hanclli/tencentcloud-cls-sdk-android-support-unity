@@ -3,8 +3,8 @@ package com.tencentcloudapi.cls.android.producer.data.adapter;
 import android.content.Context;
 
 import com.tencentcloudapi.cls.android.CLSLog;
-
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.Map;
 

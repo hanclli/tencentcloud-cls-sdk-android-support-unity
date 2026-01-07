@@ -1,7 +1,6 @@
 package com.tencentcloudapi.cls.android.producer.util;
 
 import com.tencentcloudapi.cls.android.producer.common.LogException;
-
 import net.jpountz.lz4.LZ4Compressor;
 import net.jpountz.lz4.LZ4Exception;
 import net.jpountz.lz4.LZ4Factory;

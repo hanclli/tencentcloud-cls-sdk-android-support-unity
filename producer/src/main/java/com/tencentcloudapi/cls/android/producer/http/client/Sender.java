@@ -7,10 +7,7 @@ import com.tencentcloudapi.cls.android.producer.request.SearchLogRequest;
 import com.tencentcloudapi.cls.android.producer.response.PutLogsResponse;
 import com.tencentcloudapi.cls.android.producer.response.SearchLogResponse;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Iterator;

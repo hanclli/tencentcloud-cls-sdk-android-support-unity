@@ -1,10 +1,10 @@
 package com.tencentcloudapi.cls.android.utils;
 
+import java.lang.reflect.Method;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build.VERSION;
-
-import java.lang.reflect.Method;
 
 /**
  * @author farmerx

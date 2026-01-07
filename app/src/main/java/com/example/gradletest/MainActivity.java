@@ -4,86 +4,128 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.StrictMode;
-
 import com.tencentcloudapi.cls.android.CLSLog;
 import com.tencentcloudapi.cls.android.Credential;
 import com.tencentcloudapi.cls.android.ClsConfigOptions;
 import com.tencentcloudapi.cls.android.ClsDataAPI;
 import com.tencentcloudapi.cls.android.exceptions.InvalidDataException;
+import com.tencentcloudapi.cls.android.plugin.INetworkDiagnosisPlugin;
 import com.tencentcloudapi.cls.android.producer.common.LogItem;
-import com.tencentcloudapi.cls.plugin.network_diagnosis.CLSNetDiagnosis;
-import com.tencentcloudapi.cls.plugin.unity.Unity4CLSAndroid;
+import com.tencentcloudapi.cls.plugin.network_diagnosis.CLSNetworkDiagnosis;
+import com.tencentcloudapi.cls.plugin.network_diagnosis.INetworkDiagnosis;
+import com.tencentcloudapi.cls.plugin.network_diagnosis.NetworkDiagnosisPlugin;
 
-import java.io.IOException;
+
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import javax.net.ssl.SSLContext;
 
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
+        singletonInit(this);
         try {
-            singletonInit(this);
-        } catch (IOException e) {
+            clsDNSPing();
+            clsPing();
+            clsMTR();
+            clsHttpPing(this);
+            clsTcpPing();
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-        clsNetDiagnosis();
-        sendLog(this);
+    }
+    public SSLContext getSSLContext(Context context) throws NoSuchAlgorithmException {
+        return SSLContext.getDefault();
     }
 
 
-    public void singletonInit(Context context) throws IOException {
-        //Properties prop = new Properties();
-        //prop.load(MainActivity.class.getClassLoader().getResourceAsStream("config.properties"));
-
-        // 读取配置值
-        String endpoint = "";
-        String secretId = "";
-        String secretKey = "";
-        String topicId = "";
-
+    public void singletonInit(Context context) {
         ClsConfigOptions clsConfigOptions = new ClsConfigOptions(
-                endpoint,
-                topicId,
-                new Credential(secretId, secretKey));
+                "https://ap-guangzhou-open.cls.tencentcs.com",
+                "",
+                new Credential("", ""));
         clsConfigOptions.enableLog(true);
-        Unity4CLSAndroid.initialize(clsConfigOptions);
-        /*
         clsConfigOptions.addTag("cls_android", "2.0.0");
         ClsDataAPI.startWithConfigOptions(context, clsConfigOptions);
         // 添加插件，自定义插件上报CLS内容
-        AbstractPlugin clsNetDiagnosisPlugin = new CLSNetDiagnosisPlugin();
+        INetworkDiagnosisPlugin clsNetDiagnosisPlugin = new NetworkDiagnosisPlugin();
         clsNetDiagnosisPlugin.addCustomField("test", "tag");
+        clsNetDiagnosisPlugin.setAppCredentialToken("");
         ClsDataAPI.sharedInstance(context).
                 addPlugin(clsNetDiagnosisPlugin).
-                startPlugin(context);*/
+                startPlugin(context);
     }
 
-    public void clsNetDiagnosis() {
+    public void clsHttpPing(Context context) throws NoSuchAlgorithmException {
+        CLSNetworkDiagnosis.HttpRequest request = new CLSNetworkDiagnosis.HttpRequest();
+        request.headerOnly = true;
+        request.downloadBytesLimit = 1024;
+        //可选参数，证书检验回调。getSSLContext的配置参考下文。
+        request.credential = new INetworkDiagnosis.HttpCredential(getSSLContext(context), null);
+        //可选参数，设置当次网络探测的扩展业务参数。
+        request.extension = new HashMap<String, String>() {
+            {
+                put("custom_field", "httpPing");
+            }
+        };
+        request.domain = "https://ap-guangzhou.cls.tencentcs.com";
+        CLSNetworkDiagnosis.getInstance().http(request);
+    }
+
+    public void clsDNSPing() {
+        INetworkDiagnosis.DnsRequest request = new INetworkDiagnosis.DnsRequest();
+        request.extension = new HashMap<String, String>() {
+            {
+                put("custom_field", "dns");
+            }
+        };
+        request.domain = "ap-guangzhou-open.cls.tencentcs.com";
+        CLSNetworkDiagnosis.getInstance().dns(request);
+    }
+
+    public void clsPing() {
+        INetworkDiagnosis.PingRequest request = new INetworkDiagnosis.PingRequest();
+        request.extension = new HashMap<String, String>() {
+            {
+                put("custom_field", "ping");
+            }
+        };
+        request.domain = "ap-guangzhou-open.cls.tencentcs.com";
+        CLSNetworkDiagnosis.getInstance().ping(request);
+    }
+
+    public void clsMTR() {
         Map<String, String> customFiled = new LinkedHashMap<>();
-        customFiled.put("cls","custom field");
-        CLSNetDiagnosis.getInstance().tcpPing("www.tencentcloud.com", 80, new CLSNetDiagnosis.Output(){
-            @Override
-            public void write(String line) {
-                System.out.println(line);
+        customFiled.put("cls", "custom field");
+        INetworkDiagnosis.MtrRequest request = new INetworkDiagnosis.MtrRequest();
+        request.protocol = INetworkDiagnosis.MtrRequest.Protocol.ICMP;
+        request.extension = new HashMap<String, String>() {
+            {
+                put("custom_field", "mtr");
             }
-        }, new CLSNetDiagnosis.Callback() {
-            @Override
-            public void onComplete(String result) {
-                // result为探测结果，JSON格式。
-                CLSLog.d("TraceRoute", String.format("traceRoute result: %s", result));
+        };
+        request.domain = "ap-guangzhou-open.cls.tencentcs.com";
+        CLSNetworkDiagnosis.getInstance().mtr(request);
+    }
+
+    public void clsTcpPing() {
+        INetworkDiagnosis.TcpPingRequest request = new INetworkDiagnosis.TcpPingRequest();
+        request.extension = new HashMap<String, String>() {
+            {
+                put("custom_field", "ping");
             }
-        }, customFiled);
+        };
+        request.domain = "ap-guangzhou-open.cls.tencentcs.com";
+        request.port = 80;
+        request.payload = "hello";
+        CLSNetworkDiagnosis.getInstance().tcpPing(request);
     }
 
     public void sendLog(Context context) {

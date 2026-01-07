@@ -1,18 +1,20 @@
 package com.tencentcloudapi.cls.android.scheme;
 
-import android.content.Context;
-import android.os.Build.VERSION;
-import android.text.TextUtils;
-
-import com.tencentcloudapi.cls.android.ClsConfigOptions;
-import com.tencentcloudapi.cls.android.producer.util.NetworkUtils;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import android.content.Context;
+import android.os.Build.VERSION;
+import android.text.TextUtils;
+import com.tencentcloudapi.cls.android.ClsConfigOptions;
+import com.tencentcloudapi.cls.android.producer.util.NetworkUtils;
+import com.tencentcloudapi.cls.android.utils.AppUtils;
+import com.tencentcloudapi.cls.android.utils.DeviceUtils;
+import com.tencentcloudapi.cls.android.utils.RootUtil;
 
 /**
  * Define the scheme of collection data.

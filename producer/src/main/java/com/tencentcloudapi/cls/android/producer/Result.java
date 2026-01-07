@@ -2,7 +2,6 @@ package com.tencentcloudapi.cls.android.producer;
 
 import com.google.common.collect.Iterables;
 import com.tencentcloudapi.cls.android.producer.common.Attempt;
-
 import java.util.List;
 
 /**

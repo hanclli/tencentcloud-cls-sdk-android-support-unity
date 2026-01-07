@@ -1,29 +1,16 @@
 package com.tencentcloudapi.cls.android.producer;
 
 
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.tencentcloudapi.cls.android.producer.common.BatchHandler;
-import com.tencentcloudapi.cls.android.producer.common.Constants;
-import com.tencentcloudapi.cls.android.producer.common.LogAccumulator;
-import com.tencentcloudapi.cls.android.producer.common.LogException;
-import com.tencentcloudapi.cls.android.producer.common.LogItem;
-import com.tencentcloudapi.cls.android.producer.common.LogSearch;
-import com.tencentcloudapi.cls.android.producer.common.ProducerBatch;
-import com.tencentcloudapi.cls.android.producer.common.RetryQueue;
-import com.tencentcloudapi.cls.android.producer.common.SendThreadPool;
-import com.tencentcloudapi.cls.android.producer.common.TimerSendBatchTask;
+import com.tencentcloudapi.cls.android.producer.common.*;
 import com.tencentcloudapi.cls.android.producer.errors.MaxBatchCountExceedException;
 import com.tencentcloudapi.cls.android.producer.errors.ProducerException;
 import com.tencentcloudapi.cls.android.producer.request.SearchLogRequest;
 import com.tencentcloudapi.cls.android.producer.response.SearchLogResponse;
 import com.tencentcloudapi.cls.android.producer.util.Utils;
-
-import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**

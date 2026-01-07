@@ -1,8 +1,8 @@
 package com.tencentcloudapi.cls.android.producer.request;
 
+import com.tencentcloudapi.cls.android.producer.common.Logs;
 import com.tencentcloudapi.cls.android.producer.common.Constants;
 import com.tencentcloudapi.cls.android.producer.common.Constants.CompressType;
-import com.tencentcloudapi.cls.android.producer.common.Logs;
 
 
 /**

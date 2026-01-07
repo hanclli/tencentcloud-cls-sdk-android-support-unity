@@ -10,13 +10,10 @@ import com.tencentcloudapi.cls.android.producer.request.PutLogsRequest;
 import com.tencentcloudapi.cls.android.producer.response.PutLogsResponse;
 import com.tencentcloudapi.cls.android.producer.util.LZ4Encoder;
 import com.tencentcloudapi.cls.android.producer.util.QcloudClsSignature;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 

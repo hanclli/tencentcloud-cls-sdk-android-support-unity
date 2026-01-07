@@ -17,6 +17,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import com.tencentcloudapi.cls.android.CLSLog;
+import com.tencentcloudapi.cls.android.ClsDataAPI;
 import com.tencentcloudapi.cls.android.producer.common.Constants;
 
 import java.net.InetAddress;
@@ -336,24 +337,23 @@ public final class NetworkUtils {
         public void onAvailable(Network network) {
             super.onAvailable(network);
             NetworkUtils.cleanNetworkTypeCache();
-            CLSLog.i("CLSNetworkCallback", "onAvailable is calling");
+            CLSLog.d("CLSNetworkCallback", "onAvailable is calling");
         }
 
         @Override
         public void onCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
             super.onCapabilitiesChanged(network, networkCapabilities);
             NetworkUtils.cleanNetworkTypeCache();
-            CLSLog.i("CLSNetworkCallback", "onCapabilitiesChanged is calling");
+            CLSLog.d("CLSNetworkCallback", "onCapabilitiesChanged is calling");
         }
 
         @Override
         public void onLost(Network network) {
             super.onLost(network);
             NetworkUtils.cleanNetworkTypeCache();
-            CLSLog.i("CLSNetworkCallback", "onLost is calling");
+            CLSLog.d("CLSNetworkCallback", "onLost is calling");
         }
     }
-
 
     /**
      * 是否有可用网络

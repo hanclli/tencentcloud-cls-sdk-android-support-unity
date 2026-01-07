@@ -1,5 +1,6 @@
 package com.tencentcloudapi.cls.android.producer.data;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
@@ -10,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 
 import com.tencentcloudapi.cls.android.CLSLog;
+import com.tencentcloudapi.cls.android.producer.common.Constants;
 import com.tencentcloudapi.cls.android.producer.data.adapter.DbParams;
 
 public class ClsProviderHelper {

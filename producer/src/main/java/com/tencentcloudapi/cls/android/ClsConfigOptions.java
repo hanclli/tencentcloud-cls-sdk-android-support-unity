@@ -1,5 +1,6 @@
 package com.tencentcloudapi.cls.android;
 
+import com.tencentcloudapi.cls.android.producer.Callback;
 import com.tencentcloudapi.cls.android.producer.util.Args;
 import com.tencentcloudapi.cls.android.producer.util.NetworkType;
 

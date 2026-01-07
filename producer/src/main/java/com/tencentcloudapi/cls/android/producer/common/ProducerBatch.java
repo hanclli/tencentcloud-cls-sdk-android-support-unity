@@ -9,12 +9,11 @@ import com.tencentcloudapi.cls.android.producer.Callback;
 import com.tencentcloudapi.cls.android.producer.Result;
 import com.tencentcloudapi.cls.android.producer.errors.ResultFailedException;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
-
-import javax.annotation.Nonnull;
 
 /**
  * @author farmerx

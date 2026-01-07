@@ -15,6 +15,7 @@ import com.tencentcloudapi.cls.android.exceptions.ConnectErrorException;
 import com.tencentcloudapi.cls.android.exceptions.InvalidDataException;
 import com.tencentcloudapi.cls.android.exceptions.ResponseErrorException;
 import com.tencentcloudapi.cls.android.producer.common.Constants;
+import com.tencentcloudapi.cls.android.producer.common.LogException;
 import com.tencentcloudapi.cls.android.producer.common.Logs;
 import com.tencentcloudapi.cls.android.producer.data.adapter.DbAdapter;
 import com.tencentcloudapi.cls.android.producer.data.adapter.DbParams;

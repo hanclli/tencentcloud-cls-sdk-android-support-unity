@@ -3,6 +3,7 @@ package com.tencentcloudapi.cls.android.producer.util;
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
 
+//import java.lang.management.ManagementFactory;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;

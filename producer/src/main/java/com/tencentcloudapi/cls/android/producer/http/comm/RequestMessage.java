@@ -1,7 +1,6 @@
 package com.tencentcloudapi.cls.android.producer.http.comm;
 
 import com.tencentcloudapi.cls.android.producer.util.Args;
-
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;

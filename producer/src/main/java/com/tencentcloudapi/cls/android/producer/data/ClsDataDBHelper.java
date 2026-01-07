@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.tencentcloudapi.cls.android.CLSLog;
+import com.tencentcloudapi.cls.android.producer.common.Constants;
 import com.tencentcloudapi.cls.android.producer.data.adapter.DbParams;
 
 public class ClsDataDBHelper extends SQLiteOpenHelper {
