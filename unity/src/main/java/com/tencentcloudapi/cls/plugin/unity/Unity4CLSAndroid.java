@@ -6,15 +6,12 @@ import android.util.Log;
 
 import com.tencentcloudapi.cls.android.ClsConfigOptions;
 import com.tencentcloudapi.cls.android.ClsDataAPI;
-import com.tencentcloudapi.cls.android.Credential;
 import com.tencentcloudapi.cls.android.plugin.INetworkDiagnosisPlugin;
 import com.tencentcloudapi.cls.plugin.network_diagnosis.CLSNetworkDiagnosis;
 import com.tencentcloudapi.cls.plugin.network_diagnosis.INetworkDiagnosis;
 import com.tencentcloudapi.cls.plugin.network_diagnosis.NetworkDiagnosisPlugin;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -86,5 +83,9 @@ public class Unity4CLSAndroid {
 
     public static void mtr(INetworkDiagnosis.MtrRequest request, INetworkDiagnosis.Callback callback) {
         CLSNetworkDiagnosis.getInstance().mtr(request, callback);
+    }
+
+    public static void updateUserEx(Map<String, String> userEx) {
+        CLSNetworkDiagnosis.getInstance().updateExtensions(userEx);
     }
 }
