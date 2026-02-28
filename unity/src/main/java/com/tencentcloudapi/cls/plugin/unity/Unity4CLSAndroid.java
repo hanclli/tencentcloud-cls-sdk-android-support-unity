@@ -20,7 +20,7 @@ import javax.net.ssl.SSLContext;
 
 public class Unity4CLSAndroid {
     private static final AtomicBoolean hasInit = new AtomicBoolean(false);
-    public static void initialize(ClsConfigOptions options) {
+    public static void initialize(ClsConfigOptions options, String geoToken) {
         if (hasInit.get()) {
             return;
         }
@@ -28,7 +28,7 @@ public class Unity4CLSAndroid {
         if (null == activity) {
             return;
         }
-        singletonInit(activity, options);
+        singletonInit(activity, options, geoToken);
         hasInit.set(true);
     }
 
@@ -47,14 +47,14 @@ public class Unity4CLSAndroid {
         return null;
     }
 
-    public static void singletonInit(Context context, ClsConfigOptions clsConfigOptions) {
+    public static void singletonInit(Context context, ClsConfigOptions clsConfigOptions, String geoToken) {
         clsConfigOptions.enableLog(true);
         clsConfigOptions.addTag("cls_android", "2.0.0");
         ClsDataAPI.startWithConfigOptions(context, clsConfigOptions);
         // 添加插件，自定义插件上报CLS内容
         INetworkDiagnosisPlugin clsNetDiagnosisPlugin = new NetworkDiagnosisPlugin();
         clsNetDiagnosisPlugin.addCustomField("test", "tag");
-        clsNetDiagnosisPlugin.setAppCredentialToken("");
+        clsNetDiagnosisPlugin.setAppCredentialToken(geoToken);
         ClsDataAPI.sharedInstance(context).
                 addPlugin(clsNetDiagnosisPlugin).
                 startPlugin(context);
